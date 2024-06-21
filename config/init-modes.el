@@ -150,9 +150,9 @@
   :config
   (counsel-projectile-mode)
   :bind (:map projectile-command-map
-              ("C-c p f" . counsel-projectile-find-file)
-              ("C-c p p" . counsel-projectile-switch-project)
-              ("C-c p m" . my/magit-project-status)))
+              ("f" . counsel-projectile-find-file)
+              ("p" . counsel-projectile-switch-project)
+              ("m" . my/magit-project-status)))
 
 ;; Diff-Hl
 (use-package diff-hl
