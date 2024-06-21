@@ -40,9 +40,7 @@
         scroll-preserve-screen-position 1
         left-margin-width 0
         right-margin-width 0)
-  (set-window-buffer nil (current-buffer))
-  ;; Desactivar las franjas
-  (fringe-mode 0))
+  (set-window-buffer nil (current-buffer)))
 
 (optimize-ui)
 

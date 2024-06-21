@@ -94,14 +94,23 @@
 (use-package imenu-anywhere
   :bind ("C-." . imenu-anywhere))
 
-;; Projectile
-(use-package projectile
-  :ensure t
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
+;; Ivy
+(use-package ivy
+  :diminish (ivy-mode)
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x B" . ivy-switch-buffer-other-window))
   :config
-  (projectile-mode +1)
-  (setq projectile-completion-system 'ivy))
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-plus))) ;; Usa una mejor estrategia de búsqueda
+  (setq ivy-count-format "(%d/%d) "))
+
+;; Swiper
+(use-package swiper
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-isearch-backward))) ;; Swiper para búsqueda inversa
 
 ;; Counsel
 (use-package counsel
@@ -109,11 +118,22 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x b" . ivy-switch-buffer)
-         ("C-c v" . counsel-imenu)
-         ("C-c k" . counsel-ag)
+p         ("C-c v" . counsel-imenu)
+         ("C-c k" . counsel-rg)
          ("C-x l" . counsel-locate))
   :config
   (counsel-mode 1))
+
+;; Projectile
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-project-search-path '("~/projects/" "~/Documents/projects/"))
+  (setq projectile-completion-system 'ivy)
+  :config
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
 
 ;; Counsel Projectile
 (use-package counsel-projectile
@@ -125,10 +145,19 @@
               ("C-c p f" . counsel-projectile-find-file)
               ("C-c p p" . counsel-projectile-switch-project)))
 
-;; Swiper
-(use-package swiper
+;; Diff-Hl
+(use-package diff-hl
   :ensure t
-  :bind (("C-s" . swiper)))  ; Asignar Swiper a C-s
+  :config
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+;; Magit
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
 
 ;; display-line-numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
