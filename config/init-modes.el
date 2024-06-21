@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; Asegurarse de que linum no se cargue
-(setq linum-disabled t)
+(setq display-line-numbers-disabled t)
 
 ;; ace-window
 (use-package ace-window
@@ -118,7 +118,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x b" . ivy-switch-buffer)
-p         ("C-c v" . counsel-imenu)
+         ("C-c v" . counsel-imenu)
          ("C-c k" . counsel-rg)
          ("C-x l" . counsel-locate))
   :config
@@ -135,15 +135,24 @@ p         ("C-c v" . counsel-imenu)
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
+(defun my/magit-project-status ()
+  "Open `magit-status` in the selected projectile project."
+  (interactive)
+  (let ((project (projectile-completing-read
+                  "Open magit in project: "
+                  (projectile-relevant-known-projects))))
+    (magit-status project)))
+
 ;; Counsel Projectile
 (use-package counsel-projectile
   :ensure t
   :after (projectile counsel)
   :config
   (counsel-projectile-mode)
-  :bind (:map projectile-mode-map
+  :bind (:map projectile-command-map
               ("C-c p f" . counsel-projectile-find-file)
-              ("C-c p p" . counsel-projectile-switch-project)))
+              ("C-c p p" . counsel-projectile-switch-project)
+              ("C-c p m" . my/magit-project-status)))
 
 ;; Diff-Hl
 (use-package diff-hl
@@ -167,26 +176,37 @@ p         ("C-c v" . counsel-imenu)
 (use-package operate-on-number
   :bind ("C-c o" . operate-on-number-at-point))
 
-;; smartparens
+;; Smartparens
 (use-package smartparens
+  :ensure t
   :config
-  (smartparens-global-mode t))
+  (smartparens-global-mode t)
+  (show-smartparens-global-mode t)
+  (sp-with-modes '(rust-mode)
+    (sp-local-pair "{" nil :post-handlers '((my-create-newline-and-enter-sexp "RET"))))
+  (defun my-create-newline-and-enter-sexp (&rest _ignored)
+    "Open a new brace or bracket expression, with relevant newlines."
+    (newline)
+    (indent-according-to-mode)
+    (forward-line -1)
+    (end-of-line)
+    (newline-and-indent)))
 
-;; smartrep
+;; Smartrep
 (use-package smartrep)
 
-;; super-save
+;; Super-save
 (use-package super-save
   :config
   (super-save-mode +1))
 
-;; undo-tree
+;; Undo-tree
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode))
 
-;; volatile-highlights
+;; Volatile-highlights
 (use-package volatile-highlights
   :config
   (volatile-highlights-mode t))
@@ -197,12 +217,12 @@ p         ("C-c v" . counsel-imenu)
   :config
   (which-key-mode))
 
-;; zenburn-theme
+;; Zenburn-theme
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t))
 
-;; zop-to-char
+;; Zop-to-char
 (use-package zop-to-char
   :bind ("M-z" . zop-to-char))
 
