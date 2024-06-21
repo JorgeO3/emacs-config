@@ -35,9 +35,14 @@
 (add-hook 'org-tab-after-check-for-cycling-hook
           'config/org--insert-header-if-line-empty)
 
-;; Remap copy and cut
-(global-set-key (kbd "M-w") 'kill-ring-save) ; Copy
-(global-set-key (kbd "C-w") 'kill-region) ; Cut
+;; Funciones personalizadas para borrar sin cortar al clipboard
+(defun delete-region-no-kill (start end)
+  "Delete the region without saving it to the kill-ring."
+  (interactive "r")
+  (delete-region start end))
+
+;; Remapear borrar sin cortar
+(global-set-key (kbd "C-c d") 'delete-region-no-kill)  ; Delete region without cutting
 
 ;; Additional remappings
 (global-set-key (kbd "M-o") 'other-window)
@@ -47,6 +52,10 @@
 (global-set-key (kbd "M-[") 'insert-brackets)
 (global-set-key (kbd "M-#") 'mode-line-other-buffer)
 (global-set-key (kbd "M-j") 'join-line)
+
+;; Remapear undo y redo
+(global-set-key (kbd "C-/") 'undo)
+(global-set-key (kbd "C-?") 'undo-tree-redo)
 
 (provide 'init-remappings)
 ;;; init-remappings.el ends here

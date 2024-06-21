@@ -30,6 +30,9 @@
 (use-package browse-kill-ring
   :bind ("M-y" . browse-kill-ring))
 
+(require 'undo-tree)
+(global-undo-tree-mode 1)
+
 ;; crux
 (use-package crux
   :bind (("C-c I" . crux-find-user-init-file)
