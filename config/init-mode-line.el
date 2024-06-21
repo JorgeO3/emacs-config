@@ -1,8 +1,8 @@
-;;; init-mode-line.el --- Mode line configuration -*- lexical-binding: t; -*-
+;;; init-mode-line.el --- Mode line configurations. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Mode line configuration
+;;; Configurations for the mode line.
 
 ;;; Code:
 
@@ -13,7 +13,7 @@
   :config
   (setq sml/theme 'respectful)
   (sml/setup)
-  (set-face-attribute 'sml/modes nil :foreground 'unspecified)) ;; Cambia nil por unspecified
+  (set-face-attribute 'sml/modes nil :foreground 'unspecified))
 
 (provide 'init-mode-line)
 ;;; init-mode-line.el ends here

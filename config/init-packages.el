@@ -1,8 +1,8 @@
-;;; init-packages.el --- Package configurations -*- lexical-binding: t; -*-
+;;; init-packages.el --- Package management configurations. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Package configurations
+;;; Package management configurations using package.el and use-package.
 
 ;;; Code:
 
@@ -19,14 +19,6 @@
 (eval-when-compile
   (require 'use-package))
 (setq use-package-always-ensure t)
-
-;; Start Emacs server
-(defun start-emacs-server ()
-  (require 'server)
-  (unless (server-running-p)
-    (server-start)))
-
-(start-emacs-server)
 
 (provide 'init-packages)
 ;;; init-packages.el ends here

@@ -1,8 +1,8 @@
-;;; init-fonts.el --- Font configurations -*- lexical-binding: t; -*-
+;;; init-fonts.el --- Font configurations. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Font configurations
+;;; Configurations for fonts.
 
 ;;; Code:
 

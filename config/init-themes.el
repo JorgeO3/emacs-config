@@ -1,8 +1,8 @@
-;;; init-themes.el --- Theme configuration -*- lexical-binding: t; -*-
+;;; init-themes.el --- Theme configuration. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Theme configuration
+;;; Configurations for themes.
 
 ;;; Code:
 
@@ -17,10 +17,7 @@
   "Apply the Doom theme."
   (load-theme 'doom-tomorrow-night t))
 
-;; Apply the theme when Emacs starts
 (add-hook 'after-init-hook 'apply-doom-theme)
-
-;; Apply the theme when a new frame is created (for emacsclient)
 (add-hook 'after-make-frame-functions
           (lambda (frame)
             (with-selected-frame frame

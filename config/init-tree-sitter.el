@@ -1,8 +1,8 @@
-;;; init-tree-sitter.el --- Tree-sitter configuration -*- lexical-binding: t; -*-
+;;; init-tree-sitter.el --- Tree-sitter configurations. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Tree-sitter configuration
+;;; Configurations for Tree-sitter.
 
 ;;; Code:
 

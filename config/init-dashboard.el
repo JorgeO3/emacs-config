@@ -1,8 +1,8 @@
-;;; init-dashboard.el --- Dashboard configurations -*- lexical-binding: t; -*-
+;;; init-dashboard.el --- Dashboard configuration. -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Dashboard configurations
+;;; Configurations for the dashboard.
 
 ;;; Code:
 
@@ -18,7 +18,6 @@
                           (projects . 5)
                           (agenda . 5)
                           (registers . 5)))
-  ;; Set the footer
   (setq dashboard-footer-messages '("Emacs is the best editor!"))
   (setq dashboard-footer-icon (if (display-graphic-p)
                                   (propertize "⚡" 'face 'dashboard-footer-face)

@@ -13,15 +13,17 @@
 
 ;; Load configuration modules
 (add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
-
-;; Ensure use-package is loaded first
+(require 'init-core)
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-performance)
 (require 'init-themes)
 (require 'init-dashboard)
-(require 'init-modes)
-(require 'init-remappings)
+(require 'init-editing)
+(require 'init-completion)
+(require 'init-project)
+(require 'init-programming)
+(require 'init-keybindings)
 (require 'init-mode-line)
 (require 'init-fonts)
 (require 'init-tree-sitter)
