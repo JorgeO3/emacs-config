@@ -100,35 +100,8 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :config
-  (projectile-mode +1))
-
-;; magit
-(use-package magit
-  :bind ("C-x g" . magit-status))
-
-;; move-text
-(use-package move-text
-  :config
-  (move-text-default-bindings))
-
-;; multiple-cursors
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)))
-
-;; Ivy
-(use-package ivy
-  :ensure t
-  :diminish (ivy-mode)
-  :bind (("C-c C-r" . ivy-resume)
-         ("C-x B" . ivy-switch-buffer-other-window))
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t))
+  (projectile-mode +1)
+  (setq projectile-completion-system 'ivy))
 
 ;; Counsel
 (use-package counsel
@@ -142,20 +115,20 @@
   :config
   (counsel-mode 1))
 
-;; Swiper
-(use-package swiper
-  :ensure t
-  :bind (("C-s" . swiper)))  ; Asignar Swiper a C-s
-
 ;; Counsel Projectile
 (use-package counsel-projectile
   :ensure t
   :after (projectile counsel)
   :config
   (counsel-projectile-mode)
-  :bind (("C-c p f" . counsel-projectile-find-file)
-         ("C-c p p" . counsel-projectile-switch-project)))
+  :bind (:map projectile-mode-map
+              ("C-c p f" . counsel-projectile-find-file)
+              ("C-c p p" . counsel-projectile-switch-project)))
 
+;; Swiper
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)))  ; Asignar Swiper a C-s
 
 ;; display-line-numbers
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
