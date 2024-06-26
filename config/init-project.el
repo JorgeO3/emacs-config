@@ -36,7 +36,7 @@
 (use-package projectile
   :ensure t
   :init
-  (setq projectile-project-search-path '("~/projects/" "~/Documents/projects/"))
+  (setq projectile-project-search-path '("~/Documents/trash" "~/Documents/projects/"))
   (setq projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)

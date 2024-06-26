@@ -23,8 +23,14 @@
   :bind ("M-y" . browse-kill-ring))
 
 (use-package undo-tree
-  :demand t
+  :ensure t
+  :init
+  (setq undo-tree-history-directory-alist `(("." . "~/.emacs.d/backups/undo-tree")))
+  (setq undo-tree-auto-save-history t)
   :config
+  ;; Ensure the backup directory exists
+  (unless (file-exists-p "~/.emacs.d/backups/undo-tree")
+    (make-directory "~/.emacs.d/backups/undo-tree" t))
   (global-undo-tree-mode))
 
 (use-package crux
@@ -51,8 +57,8 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-(use-package flycheck
-  :init (global-flycheck-mode))
+;; (use-package flycheck
+;;   :init (global-flycheck-mode))
 
 (use-package gist
   :bind ("C-c g" . gist-list))
@@ -85,6 +91,18 @@
     (forward-line -1)
     (end-of-line)
     (newline-and-indent)))
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+         ("C-c m n" . mc/mark-next-like-this)
+         ("C-c m p" . mc/mark-previous-like-this)
+         ("C-c m q" . mc/unmark-next-like-this)
+         ("C-c m w" . mc/unmark-previous-like-this)))
 
 (use-package smartrep)
 

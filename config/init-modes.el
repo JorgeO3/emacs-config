@@ -65,11 +65,11 @@
 
 ;; expand-region
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
-
-;; flycheck
-(use-package flycheck
-  :init (global-flycheck-mode))
+  :bind ("C-=" . er/expand-region)
+         ("C--" . er/contract-region))
+;; ;; flycheck
+;; (use-package flycheck
+;;   :init (global-flycheck-mode))
 
 ;; gist
 (use-package gist

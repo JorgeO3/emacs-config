@@ -11,22 +11,35 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;; Add configuration directories to load-path
+(dolist (dir '("config" "config/init-lang"))
+  (add-to-list 'load-path (expand-file-name dir user-emacs-directory)))
+
 ;; Load configuration modules
-(add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
-(require 'init-core)
-(require 'init-packages)
-(require 'init-ui)
-(require 'init-performance)
-(require 'init-themes)
-(require 'init-dashboard)
-(require 'init-editing)
-(require 'init-completion)
-(require 'init-project)
-(require 'init-programming)
-(require 'init-keybindings)
-(require 'init-mode-line)
-(require 'init-fonts)
-(require 'init-tree-sitter)
+(dolist (module '(init-core
+		  init-packages
+		  init-ui
+		  init-performance
+		  init-backups
+                  init-themes
+		  init-dashboard
+		  init-editing
+		  init-completion
+                  init-project
+		  init-programming
+		  init-keybindings
+		  init-mode-line
+                  init-fonts
+		  init-tree-sitter
+		  init-rust
+		  init-go
+		  init-json
+		  init-typescript
+		  init-javascript
+		  init-vue
+		  init-react
+		  init-terminal))
+  (require module))
 
 (provide 'init)
 ;;; init.el ends here

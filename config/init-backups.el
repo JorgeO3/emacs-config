@@ -1,28 +1,35 @@
-;;; init-backups.el --- Configurations for backups managament -*- lexical-binding: t; -*-
+;;; init-backups.el --- Configurations for backups management -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
-;;; Dashboard configurations
+;;; Backup and auto-save configurations
 
 ;;; Code:
 
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+;; Enable backups and auto-save
+(setq make-backup-files t)
+(setq auto-save-default t)
 
-;; Guardar archivos de respaldo y auto-guardado en un directorio específico
+;; Directory for backups and auto-save files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs.d/auto-saves/" t)))
 
-;; Crear directorios si no existen
-(unless (file-exists-p "~/.emacs.d/backups")
-  (make-directory "~/.emacs.d/backups"))
-(unless (file-exists-p "~/.emacs.d/auto-saves")
-  (make-directory "~/.emacs.d/auto-saves"))
+;; Ensure backup and auto-save directories exist
+(let ((backup-dir "~/.emacs.d/backups")
+      (auto-save-dir "~/.emacs.d/auto-saves"))
+  (unless (file-exists-p backup-dir)
+    (make-directory backup-dir t))
+  (unless (file-exists-p auto-save-dir)
+    (make-directory auto-save-dir t)))
 
-;; Configuraciones adicionales para limpieza de archivos de respaldo y auto-guardado
+;; Additional backup configurations
 (setq delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
-      version-control t)  ;; Usar números de versión para archivos de respaldo
-(setq delete-auto-save-files t)
+      version-control t  ;; Use version numbers for backups
+      delete-auto-save-files t)
+
+(provide 'init-backups)
+
+;;; init-backups.el ends here
