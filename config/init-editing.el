@@ -25,13 +25,21 @@
 (use-package undo-tree
   :ensure t
   :init
+  (setq undo-tree-auto-save-history nil)
   (setq undo-tree-history-directory-alist `(("." . "~/.emacs.d/backups/undo-tree")))
-  (setq undo-tree-auto-save-history t)
   :config
-  ;; Ensure the backup directory exists
   (unless (file-exists-p "~/.emacs.d/backups/undo-tree")
     (make-directory "~/.emacs.d/backups/undo-tree" t))
   (global-undo-tree-mode))
+
+(defun my-kill-buffer-and-undo-tree ()
+  "Kill buffer and clear undo-tree history."
+  (when (bound-and-true-p undo-tree-mode)
+    (setq undo-tree-mode nil)
+    (setq buffer-undo-list nil)))
+
+;; Delete buffers when they are closed
+(add-hook 'kill-buffer-hook 'my-kill-buffer-and-undo-tree)
 
 (use-package crux
   :bind (("C-c I" . crux-find-user-init-file)
